@@ -1,0 +1,11 @@
+db/
+jupyter/workspace/data/ml-1m/
+jupyter/workspace/data/output/
+jupyter/workspace/data/stream/
+jupyter/workspace/project/output/
+jupyter/workspace/project/*.csv
+.history/
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+*.history
+.DS_Store
