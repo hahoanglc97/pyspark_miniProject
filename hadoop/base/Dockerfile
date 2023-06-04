@@ -5,15 +5,15 @@ ARG DEBIAN_FRONTEND=noninteractive
 COPY test.py /
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-      openjdk-8-jdk \
-      net-tools \
-      curl \
-      netcat \
-      gnupg \
-      libsnappy-dev \
-      nano \
-      wget \
-    && rm -rf /var/lib/apt/lists/*
+       openjdk-8-jdk \
+       net-tools \
+       curl \
+       netcat \
+       gnupg \
+       libsnappy-dev \
+       nano \
+       wget \
+       && rm -rf /var/lib/apt/lists/*
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y make build-essential libssl-dev zlib1g-dev \
        libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
@@ -37,14 +37,14 @@ ENV HADOOP_VERSION 3.2.3
 
 ADD hadoop-3.2.3.tar.gz /opt/
 RUN ls /opt
-# ENV HADOOP_URL https://www.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
+ENV HADOOP_URL https://www.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
 
-# RUN set -x \
-#     && curl -fSL "$HADOOP_URL" -o /tmp/hadoop.tar.gz \
-#     && curl -fSL "$HADOOP_URL.asc" -o /tmp/hadoop.tar.gz.asc \
-#     && gpg --verify /tmp/hadoop.tar.gz.asc \
-#     && tar -xvf /tmp/hadoop.tar.gz -C /opt/ \
-#     && rm /tmp/hadoop.tar.gz*
+RUN set -x \
+       && curl -fSL "$HADOOP_URL" -o /tmp/hadoop.tar.gz \
+       && curl -fSL "$HADOOP_URL.asc" -o /tmp/hadoop.tar.gz.asc \
+       && gpg --verify /tmp/hadoop.tar.gz.asc \
+       && tar -xvf /tmp/hadoop.tar.gz -C /opt/ \
+       && rm /tmp/hadoop.tar.gz*
 
 RUN ln -s /opt/hadoop-$HADOOP_VERSION/etc/hadoop /etc/hadoop
 
